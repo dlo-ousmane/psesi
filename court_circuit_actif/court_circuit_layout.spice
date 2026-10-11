@@ -1,0 +1,47 @@
+* NGSPICE file created from TOP.ext - technology: ihp-sg13g2
+
+
+.subckt nmosHV$1 a_1068_0# a_68_n36# VSUB a_0_0#
+X0 a_1068_0# a_68_n36# a_0_0# VSUB sg13_hv_nmos ad=0.68p pd=4.68u as=0.68p ps=4.68u w=2u l=5u
+C0 a_0_0# a_1068_0# 0.01132f
+C1 a_0_0# a_68_n36# 0.0417f
+C2 a_1068_0# a_68_n36# 0.0417f
+C3 a_1068_0# VSUB 0.12209f
+C4 a_0_0# VSUB 0.12209f
+C5 a_68_n36# VSUB 1.68729f
+.ends
+
+.subckt pmosHV$1 a_1068_0# a_68_n36# w_n124_n124# VSUB a_0_0#
+X0 a_1068_0# a_68_n36# a_0_0# w_n124_n124# sg13_hv_pmos ad=0.68p pd=4.68u as=0.68p ps=4.68u w=2u l=5u
+C0 a_68_n36# a_1068_0# 0.0417f
+C1 a_1068_0# a_0_0# 0.01132f
+C2 a_68_n36# a_0_0# 0.0417f
+C3 a_1068_0# w_n124_n124# 0.01382f
+C4 a_68_n36# w_n124_n124# 1.23874f
+C5 a_0_0# w_n124_n124# 0.01382f
+C6 a_1068_0# VSUB 0.10828f
+C7 a_0_0# VSUB 0.10828f
+C8 a_68_n36# VSUB 0.44855f
+.ends
+
+.subckt court_circuit_layout in out
+XnmosHV$1_1 in a_n39_n1582# 0 a_n39_n1582# nmosHV$1
+XnmosHV$1_0 a_n39_n1582# a_n31_n146# 0 a_n31_n146# nmosHV$1
+XnmosHV$1_2 out a_n39_n1582# 0 a_n31_n146# nmosHV$1
+XpmosHV$1_0 a_n39_n1582# a_n31_n146# VDD 0 VDD pmosHV$1
+XpmosHV$1_1 a_n31_n146# a_n31_n146# VDD 0 VDD pmosHV$1
+C0 out in 0.03203f
+C1 VDD a_n39_n1582# 0.10687f
+C2 a_n39_n1582# in 0.00824f
+C3 out a_n31_n146# 0.00121f
+C4 out a_n39_n1582# 0.0024f
+C5 a_n39_n1582# a_n31_n146# 0.07865f
+C6 VDD out 0
+C7 VDD a_n31_n146# 1.358f
+C9 a_n39_n1582# 0 4.36327f
+C10 VDD 0 1.95852f
+C11 out 0 0.44429f
+C12 a_n31_n146# 0 2.84496f
+C13 in 0 0.47333f
+.ends
+

@@ -1,0 +1,143 @@
+* NGSPICE file created from TOP.ext - technology: ihp-sg13g2
+
+.subckt pmosHV$1 a_1068_0# a_68_n36# w_n124_n124# sub a_0_0#
+X0 a_1068_0# a_68_n36# a_0_0# w_n124_n124# sg13_hv_pmos ad=0.68p pd=4.68u as=0.68p ps=4.68u w=2u l=5u
+C0 w_n124_n124# a_0_0# 0.05625f
+C1 a_68_n36# a_1068_0# 0.0802f
+C2 a_0_0# a_1068_0# 0.01151f
+C3 w_n124_n124# a_1068_0# 0.05625f
+C4 a_0_0# a_68_n36# 0.0802f
+C5 w_n124_n124# a_68_n36# 1.23874f
+C6 a_1068_0# sub 0.06585f
+C7 a_0_0# sub 0.06585f
+C8 a_68_n36# sub 0.2704f
+.ends
+
+.subckt pnpMPA_gen a_n100_n200# dw_n288_n340# a_n550_n602#
+X0 a_n550_n602# dw_n288_n340# a_n100_n200# pnpMPA a=2p p=6u
+C0 dw_n288_n340# a_n100_n200# 0.46352f
+C1 dw_n288_n340# a_n550_n602# 0.53131f
+.ends
+
+.subckt rhigh_gen$3 sub a_0_n86# a_0_0# a_0_6500#
+X0 a_0_6500# a_0_n86# sub rhigh l=32.5u w=0.5u
+C0 a_0_n86# a_0_0# 0.01822f
+C1 a_0_6500# a_0_0# 0.01822f
+C2 a_0_n86# sub 0.11986f
+C3 a_0_0# sub 4.31569f
+C4 a_0_6500# sub 0.11986f
+.ends
+
+.subckt pnpMPA_gen$3 a_n100_n200# dw_n288_n340# a_n550_n602#
+X0 a_n550_n602# dw_n288_n340# a_n100_n200# pnpMPA a=2p p=6u
+C0 dw_n288_n340# a_n100_n200# 0.46352f
+C1 dw_n288_n340# a_n550_n602# 0.53131f
+.ends
+
+.subckt nmosHV$1 a_1068_0# a_68_n36# sub a_0_0#
+X0 a_1068_0# a_68_n36# a_0_0# sub sg13_hv_nmos ad=0.68p pd=4.68u as=0.68p ps=4.68u w=2u l=5u
+C0 a_68_n36# a_1068_0# 0.0802f
+C1 a_1068_0# a_0_0# 0.01151f
+C2 a_68_n36# a_0_0# 0.0802f
+C3 a_1068_0# sub 0.08937f
+C4 a_0_0# sub 0.08937f
+C5 a_68_n36# sub 1.50915f
+.ends
+
+.subckt rhigh_gen$2 a_0_3800# sub a_0_n86# a_0_0#
+X0 a_0_3800# a_0_n86# sub rhigh l=19u w=0.5u
+C0 a_0_n86# a_0_0# 0.01822f
+C1 a_0_3800# a_0_0# 0.01822f
+C2 a_0_n86# sub 0.11986f
+C3 a_0_0# sub 2.52302f
+C4 a_0_3800# sub 0.11986f
+.ends
+
+.subckt bandgap_layout OUT
+XpmosHV$1_2 net1 net1 VDD 0 VDD pmosHV$1
+XpnpMPA_gen_10 m1_2519_n60# 0 0 pnpMPA_gen
+XpnpMPA_gen_11 m1_2519_n60# 0 0 pnpMPA_gen
+XpnpMPA_gen_12 m1_2519_n60# 0 0 pnpMPA_gen
+XpnpMPA_gen_13 m1_2519_n60# 0 0 pnpMPA_gen
+Xrhigh_gen$3_0 0 m1_2519_n60# rhigh_gen$3_0/a_0_0# m1_9131_417# rhigh_gen$3
+Xrhigh_gen$3_1 0 m1_2518_700# rhigh_gen$3_1/a_0_0# m1_9131_417# rhigh_gen$3
+XpnpMPA_gen_14 m1_2519_n60# 0 0 pnpMPA_gen
+XpnpMPA_gen$3_0 net3 0 0 pnpMPA_gen$3
+Xrhigh_gen$3_2 0 m1_2518_700# rhigh_gen$3_2/a_0_0# m1_9128_932# rhigh_gen$3
+XpnpMPA_gen_15 net5 0 0 pnpMPA_gen
+Xrhigh_gen$3_3 0 OUT rhigh_gen$3_3/a_0_0# m1_9128_932# rhigh_gen$3
+XpnpMPA_gen_0 net5 0 0 pnpMPA_gen
+XpnpMPA_gen_1 net5 0 0 pnpMPA_gen
+XpnpMPA_gen_2 net5 0 0 pnpMPA_gen
+XpnpMPA_gen_3 net5 0 0 pnpMPA_gen
+XpnpMPA_gen_4 net5 0 0 pnpMPA_gen
+XpnpMPA_gen_5 net5 0 0 pnpMPA_gen
+XpnpMPA_gen_6 net5 0 0 pnpMPA_gen
+XpnpMPA_gen_8 m1_2519_n60# 0 0 pnpMPA_gen
+XpnpMPA_gen_7 m1_2519_n60# 0 0 pnpMPA_gen
+XnmosHV$1_0 net4 net2 0 net1 nmosHV$1
+XnmosHV$1_1 net2 net1 0 net1 nmosHV$1
+XpnpMPA_gen_9 m1_2519_n60# 0 0 pnpMPA_gen
+XnmosHV$1_2 net3 net2 0 net2 nmosHV$1
+Xrhigh_gen$2_0 net5 0 net4 rhigh_gen$2_0/a_0_0# rhigh_gen$2
+XpmosHV$1_0 OUT net1 VDD 0 VDD pmosHV$1
+XpmosHV$1_1 net2 net1 VDD 0 VDD pmosHV$1
+C0 rhigh_gen$3_3/a_0_0# m1_2518_700# 0
+C1 m1_9128_932# rhigh_gen$3_2/a_0_0# 0
+C2 OUT m1_2518_700# 0.04672f
+C3 rhigh_gen$3_2/a_0_0# m1_2519_n60# 0.01468f
+C4 rhigh_gen$3_0/a_0_0# m1_2519_n60# 0.07986f
+C5 VDD OUT 0.13434f
+C6 VDD net2 0.1152f
+C7 rhigh_gen$3_1/a_0_0# m1_9128_932# 0
+C8 m1_9131_417# rhigh_gen$3_0/a_0_0# 0
+C9 OUT rhigh_gen$3_3/a_0_0# 0.00706f
+C10 rhigh_gen$3_1/a_0_0# m1_2519_n60# 0.02656f
+C11 rhigh_gen$2_0/a_0_0# net2 0.00165f
+C12 rhigh_gen$3_1/a_0_0# m1_9131_417# 0
+C13 net1 m1_2518_700# 0.00435f
+C14 VDD net1 1.727f
+C15 m1_9128_932# m1_2519_n60# 0
+C16 rhigh_gen$3_2/a_0_0# m1_2518_700# 0
+C17 net1 OUT 0.14164f
+C18 VDD net4 0
+C19 m1_9131_417# m1_9128_932# 0.01617f
+C20 net1 net2 0.07822f
+C21 rhigh_gen$2_0/a_0_0# net1 0
+C22 m1_9131_417# m1_2519_n60# 0.006f
+C23 net4 net2 0.01265f
+C24 rhigh_gen$2_0/a_0_0# net4 0.00457f
+C25 rhigh_gen$3_3/a_0_0# rhigh_gen$3_2/a_0_0# 0.52904f
+C26 rhigh_gen$3_1/a_0_0# m1_2518_700# 0
+C27 OUT rhigh_gen$3_2/a_0_0# 0.0015f
+C28 rhigh_gen$3_0/a_0_0# OUT 0
+C29 VDD net3 0
+C30 rhigh_gen$2_0/a_0_0# net5 0.07981f
+C31 rhigh_gen$3_1/a_0_0# OUT 0
+C32 net3 net2 0.0178f
+C33 m1_2519_n60# m1_2518_700# 0.01453f
+C34 rhigh_gen$3_3/a_0_0# m1_9128_932# 0
+C35 VDD m1_2519_n60# 0.00512f
+C36 rhigh_gen$3_3/a_0_0# m1_2519_n60# 0.00945f
+C37 OUT m1_2519_n60# 0.02179f
+C38 rhigh_gen$2_0/a_0_0# m1_2519_n60# 0
+C39 net4 net5 0
+C40 net4 net3 0.0087f
+C41 rhigh_gen$3_1/a_0_0# rhigh_gen$3_2/a_0_0# 0.49469f
+C42 rhigh_gen$3_1/a_0_0# rhigh_gen$3_0/a_0_0# 0.44544f
+C43 net1 m1_2519_n60# 0.01964f
+C44 VDD m1_2518_700# 0.00103f
+C45 net2 0 0.57383f
+C46 OUT 0 0.83884f
+C47 rhigh_gen$2_0/a_0_0# 0 0.12766f
+C48 net1 0 -0.2349f
+C49 net4 0 0.41968f
+C50 m1_9128_932# 0 0.01616f
+C51 net5 0 6.88152f
+C52 m1_2518_700# 0 -0.02874f
+C53 net3 0 0.57065f
+C54 m1_9131_417# 0 0.02648f
+C55 rhigh_gen$3_0/a_0_0# 0 0.02653f
+C56 m1_2519_n60# 0 8.53505f
+C57 VDD 0 1.56929f
+.ends

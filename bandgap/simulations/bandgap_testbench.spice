@@ -1,0 +1,81 @@
+** sch_path: ../../psesi/circuit_tp2/bandgap_testbench.sym
+**.subckt bandgap_testbench out
+*.opin out
+x1 out bandgap
+V1 VDD 0 vdd
+**** begin user architecture code
+
+
+
+
+
+	#dc temp -20 100 1
+	#dc V1 0 3.3 0.01
+	#tran 0.01m 1m
+
+.param Rval = 56k
+.param vdd = 3.3
+.param W = 2u
+.param K = 1
+.param L = 5u
+.control
+
+save all
+shell rm -f bandgap_testbench.raw
+set appendwrite
+#600k 672k 700k 800k 1000K
+foreach val 389K
+	alterparam Rval = $val
+	reset
+	#dc temp -20 100 1
+	dc V1 0 3.3 0.01
+	write bandgap_testbench.raw
+end
+unset appendwrite
+#write bandgap_testbench.raw
+
+.endc
+
+
+
+.lib ~src/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerHBT.lib hbt_typ
+.lib ~src/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+.lib ~src/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerMOShv.lib mos_tt
+.lib ~src/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerRES.lib res_typ
+
+
+
+.lib ~src/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerHBT.lib hbt_typ
+.lib ~src/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+.lib ~src/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerMOShv.lib mos_tt
+.lib ~src/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerRES.lib res_typ
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  bandgap.sym # of pins=1
+** sym_path: ../../psesi/bandgap/bandgap.sym
+** sch_path: ../../psesi/bandgap/bandgap.sch
+.subckt bandgap out
+*.opin out
+XM1 net2 net1 VDD VDD sg13_hv_pmos w=W l=L ng=1
+XM2 net1 net1 VDD VDD sg13_hv_pmos w=W l=L ng=1
+XM3 net1 net2 net4 0 sg13_hv_nmos w=K*W l=L ng=1
+XM4 net2 net2 net3 0 sg13_hv_nmos w=W l=L ng=1
+XQ1 0 0 net3 pnpMPA a=2e-12 p=6e-06
+XQ2 0 0 net5 pnpMPA a=2e-12 p=6e-06 m=8
+XM5 out net1 VDD VDD sg13_hv_pmos w=W l=L ng=1
+XQ3 0 0 net6 pnpMPA a=2e-12 p=6e-06 m=8
+XMStartup net1 net1 net2 0 sg13_hv_nmos w=W l=L ng=1
+**** begin user architecture code
+
+.param W=2u K=1 L=5u Rval=389k
+
+**** end user architecture code
+XR1 net4 net5 0 rhigh w=0.5e-6 l=19e-6 m=1 b=0
+XR2 out net6 0 rhigh w=0.5e-6 l=130e-6 m=1 b=0
+.ends
+
+.GLOBAL VDD
+.end

@@ -1,0 +1,14 @@
+# 1. Dire à Xschem où trouver la configuration principale du PDK IHP
+# On utilise les variables définies à l'étape 1
+source $env(PDK_ROOT)/$env(PDK)/libs.tech/xschem/xschemrc
+
+# 2. Définir le dossier local pour les simulations (plus propre)
+set netlist_dir [file normalize ./simulations]
+
+# 3. (Optionnel) Ajouter le dossier courant pour vos propres symboles
+append XSCHEM_LIBRARY_PATH :[file normalize .]
+
+puts "Configuration IHP locale chargée avec succès !"
+
+#changement d'editeur
+set editor "gedit"

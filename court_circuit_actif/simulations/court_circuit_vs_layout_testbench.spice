@@ -1,0 +1,49 @@
+** sch_path: ../court_circuit_vs_layout_testbench.sch
+**.subckt court_circuit_vs_layout_testbench
+x1 out_schematic in court_circuit
+V1 in 0 PULSE(0 1.2 1n 100p 100p 1u 10u)
+I0 out_schematic 0 1U
+V2 VDD 0 3.3
+I1 out_layout 0 1U
+x2 in out_layout court_circuit_layout
+**** begin user architecture code
+
+
+
+
+
+.param W=2u  L=5u k=1
+.control
+save all
+#op
+#dc V1 0 3.3 0.01
+tran 10p 50n
+write court_circuit_vs_layout_testbench.raw
+.endc
+
+
+
+.lib ~src/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerMOShv.lib mos_tt
+
+
+.include ../court_circuit_layout.spice
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  court_circuit.sym # of pins=2
+** sym_path: ../court_circuit.sym
+** sch_path: ../court_circuit.sch
+.subckt court_circuit out in
+*.ipin in
+*.opin out
+XM1 net1 net2 VDD VDD sg13_hv_pmos w=W l=L ng=1
+XM2 net2 net2 VDD VDD sg13_hv_pmos w=W l=L ng=1
+XM4 net2 net1 out 0 sg13_hv_nmos w=K*W l=L ng=1
+XM3 net1 net1 in 0 sg13_hv_nmos w=W l=L ng=1
+XStartup net2 net2 net1 0 sg13_hv_nmos w=W l=L ng=1
+.ends
+
+.GLOBAL VDD
+.end
